@@ -79,7 +79,7 @@ struct SideMenuView: View {
             }//end of scrollview
             
         }//end of navigation view
-        //imp
+        
        
     }
 }

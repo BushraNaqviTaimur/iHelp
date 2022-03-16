@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		599375C227E290FF00E452A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 599375C127E290FF00E452A6 /* GoogleService-Info.plist */; };
 		59C09CF12786359300FC06D1 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C09CF02786359300FC06D1 /* SideMenuView.swift */; };
 		59C09CF32786496100FC06D1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C09CF22786496100FC06D1 /* LoginView.swift */; };
 		59C9A0C6273ED39000A430A9 /* iHelpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C9A0C5273ED39000A430A9 /* iHelpApp.swift */; };
@@ -18,9 +19,12 @@
 		59C9A0E02751F4F000A430A9 /* mainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C9A0DF2751F4F000A430A9 /* mainScreen.swift */; };
 		59E09C06278E11D10037E83E /* RegistrationForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E09C05278E11D10037E83E /* RegistrationForm.swift */; };
 		59E09C08279221C20037E83E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E09C07279221C20037E83E /* ProfileView.swift */; };
+		67852CD74E70DFF170D6A674 /* Pods_iHelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD0ABAE9401CC6F01DC2CA2 /* Pods_iHelp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40D055BF75B2B2CEB30533AD /* Pods-iHelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iHelp.debug.xcconfig"; path = "Target Support Files/Pods-iHelp/Pods-iHelp.debug.xcconfig"; sourceTree = "<group>"; };
+		599375C127E290FF00E452A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		59C09CF02786359300FC06D1 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		59C09CF22786496100FC06D1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		59C9A0C2273ED39000A430A9 /* iHelp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iHelp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,6 +37,8 @@
 		59C9A0DF2751F4F000A430A9 /* mainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainScreen.swift; sourceTree = "<group>"; };
 		59E09C05278E11D10037E83E /* RegistrationForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationForm.swift; sourceTree = "<group>"; };
 		59E09C07279221C20037E83E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		6CD0ABAE9401CC6F01DC2CA2 /* Pods_iHelp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iHelp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF554BB16DD56FBCA6ED83E8 /* Pods-iHelp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iHelp.release.xcconfig"; path = "Target Support Files/Pods-iHelp/Pods-iHelp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67852CD74E70DFF170D6A674 /* Pods_iHelp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +58,8 @@
 			children = (
 				59C9A0C4273ED39000A430A9 /* iHelp */,
 				59C9A0C3273ED39000A430A9 /* Products */,
+				8765DF29C648EECCCB4DE0C9 /* Pods */,
+				B9924D980D9957310CF5A111 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,8 +125,26 @@
 				59C9A0C5273ED39000A430A9 /* iHelpApp.swift */,
 				59C9A0C7273ED39000A430A9 /* ContentView.swift */,
 				59C9A0DD273EDFA500A430A9 /* OnboardingView.swift */,
+				599375C127E290FF00E452A6 /* GoogleService-Info.plist */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		8765DF29C648EECCCB4DE0C9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				40D055BF75B2B2CEB30533AD /* Pods-iHelp.debug.xcconfig */,
+				FF554BB16DD56FBCA6ED83E8 /* Pods-iHelp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B9924D980D9957310CF5A111 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6CD0ABAE9401CC6F01DC2CA2 /* Pods_iHelp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,9 +154,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 59C9A0D0273ED39200A430A9 /* Build configuration list for PBXNativeTarget "iHelp" */;
 			buildPhases = (
+				27FA7BED0DE39A3B5E8F3E9C /* [CP] Check Pods Manifest.lock */,
 				59C9A0BE273ED39000A430A9 /* Sources */,
 				59C9A0BF273ED39000A430A9 /* Frameworks */,
 				59C9A0C0273ED39000A430A9 /* Resources */,
+				345669A55F7B1CCC9327AB02 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -180,10 +209,53 @@
 			files = (
 				59C9A0CD273ED39200A430A9 /* Preview Assets.xcassets in Resources */,
 				59C9A0CA273ED39200A430A9 /* Assets.xcassets in Resources */,
+				599375C227E290FF00E452A6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		27FA7BED0DE39A3B5E8F3E9C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iHelp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		345669A55F7B1CCC9327AB02 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iHelp/Pods-iHelp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iHelp/Pods-iHelp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iHelp/Pods-iHelp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		59C9A0BE273ED39000A430A9 /* Sources */ = {
@@ -323,6 +395,7 @@
 		};
 		59C9A0D1273ED39200A430A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40D055BF75B2B2CEB30533AD /* Pods-iHelp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -352,6 +425,7 @@
 		};
 		59C9A0D2273ED39200A430A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF554BB16DD56FBCA6ED83E8 /* Pods-iHelp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
