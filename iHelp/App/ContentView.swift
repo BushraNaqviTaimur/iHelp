@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isShowingSettings: Bool = false
-   
+        
     
     var body: some View {
           
         NavigationView{
-            //LoginView()
-            mainScreen()
+            LoginView()
+            //mainScreen()
             
             
             

@@ -6,13 +6,63 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+
+class AppViewModel: ObservableObject {
+    
+    let auth = Auth.auth()
+    
+  
+    
+    @Published var signedIn = false
+    
+    var isSignedIn: Bool {
+        return auth.currentUser != nil
+    }
+    
+    func signOut() {
+        
+    try? auth.signOut()
+        
+    self.signedIn = false
+        
+    }
+
+    func signIn(email: String, password: String) {
+        auth.signIn(withEmail: email, password: password) { [weak self] result, error in
+            guard result != nil, error == nil else {
+                return
+            }
+            
+            //success
+           
+           DispatchQueue.main.async {
+                self?.signedIn=true
+            }
+            
+    }
+    }
+
+    func signUp(email: String, password: String) {
+        auth.createUser(withEmail: email, password: password) { result, error in
+            guard result != nil, error == nil else {
+                return
+            }
+            
+    // Success
+        }
+                                                                
+    }
+}
 
 let storedUsername = "Myusername"
 let storedPassword = "Mypassword"
 
 struct LoginView: View {
-    @State var email: String = ""
-    @State var password: String = ""
+    
+    @EnvironmentObject var viewModel: AppViewModel
+    @State var email = ""
+    @State var password = ""
     
     @State var authenticationDidFail: Bool = false
     @State var authenticationDidSucceed: Bool = false
@@ -21,11 +71,55 @@ struct LoginView: View {
     @State private var scale: CGFloat = 1
     
     var body: some View {
+        NavigationView{
+        if viewModel.signedIn{
+            
+        Text ("You are signed in")
+        }
+        else {
+           
+        LoginView()
+        }
+        }
+        .onAppear {
+
+        viewModel.signedIn=viewModel.isSignedIn
+        }
+        
         ZStack{
         VStack {
+            
+            Logo()
+            
+            TextField("Email Address", text: $email)
+                .disableAutocorrection(true)
+                .autocapitalization(.none)
+                .padding()
+                .background(Color(.secondarySystemBackground))
+            
+            SecureField("Password", text: $password)
+            .disableAutocorrection(true)
+            .autocapitalization(.none)
+            .padding()
+            .background (Color(.secondarySystemBackground))
+            
+            Button(action: {
+            guard !email.isEmpty, !password.isEmpty else {
+            return
+            }
+            viewModel.signIn(email: email, password: password)
+                
+            },label:
+            {
+            Text ("LOGIN")
+                    .foregroundColor(Color.white)
+                    .frame (width: 200, height: 50)
+                    .cornerRadius(8)
+                    .background(Color.green)
+            })
                     
-                    Logo()
-            UsernameTextField(email: $email, editingMode: $editingMode)
+                    
+      /*      UsernameTextField(email: $email, editingMode: $editingMode)
                             PasswordSecureField(password: $password)
                             if authenticationDidFail {
                                 Text("Information not correct. Try again.")
@@ -33,23 +127,31 @@ struct LoginView: View {
                                     .foregroundColor(.red)
                             }
                     Button(action: {
+                        guard !email.isEmpty, !password.isEmpty else{
+                            return
+                        }
+                        viewModel.signIn(email: email, password: password)
+                        
+                            
+                           
                         //actioncode
-                        if self.email == storedUsername && self.password == storedPassword {
+                       if self.email == storedUsername && self.password == storedPassword {
                                                self.authenticationDidSucceed = true
                                                self.authenticationDidFail = false
                                            } else {
                                                self.authenticationDidFail = true
                                            }
                         
-                    }) {
+                   } ) {
                         
                        LoginButtonContent()
-                    }
+                    } */
             HStack{
                 Text("Don't have an account?").foregroundColor(Color.black)
                 
                 Button( action:{
                     //action
+                    viewModel.signOut()
                 }){
                     Text("Sign Up")
                 }

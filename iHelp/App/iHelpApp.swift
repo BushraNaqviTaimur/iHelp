@@ -16,7 +16,9 @@ struct iHelpApp: App {
     
     var body: some Scene {
         WindowGroup {
+            let viewModel = AppViewModel()
             ContentView()
+                .environmentObject(viewModel)
         }
     }
 }
