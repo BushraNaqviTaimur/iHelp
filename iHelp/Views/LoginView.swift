@@ -20,13 +20,7 @@ class AppViewModel: ObservableObject {
         return auth.currentUser != nil
     }
     
-    func signOut() {
-        
-    try? auth.signOut()
-        
-    self.signedIn = false
-        
-    }
+ 
 
     func signIn(email: String, password: String) {
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
@@ -42,6 +36,8 @@ class AppViewModel: ObservableObject {
             
     }
     }
+    
+    
 
     func signUp(email: String, password: String) {
         auth.createUser(withEmail: email, password: password) { result, error in
@@ -50,22 +46,36 @@ class AppViewModel: ObservableObject {
             }
             
     // Success
+            DispatchQueue.main.async {
+                //self?.signedIn=true
         }
                                                                 
     }
+    }
+    
+    func signOut() {
+        
+    try? auth.signOut()
+        
+    self.signedIn = false
+        
+    }
+    
+    
 }
 
-let storedUsername = "Myusername"
-let storedPassword = "Mypassword"
+//let storedUsername = "Myusername"
+//let storedPassword = "Mypassword"
 
 struct LoginView: View {
     
     @EnvironmentObject var viewModel: AppViewModel
+    
     @State var email = ""
     @State var password = ""
     
     @State var authenticationDidFail: Bool = false
-    @State var authenticationDidSucceed: Bool = false
+   @State var authenticationDidSucceed: Bool = false
        
        @State var editingMode: Bool = false
     @State private var scale: CGFloat = 1
@@ -73,8 +83,9 @@ struct LoginView: View {
     var body: some View {
         NavigationView{
         if viewModel.signedIn{
-            
+            VStack{
         Text ("You are signed in")
+            }
         }
         else {
            
