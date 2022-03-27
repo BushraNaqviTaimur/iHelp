@@ -9,27 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isShowingSettings: Bool = false
-        
     
+    @EnvironmentObject var viewModel: AppViewModel
+     
     var body: some View {
           
         NavigationView{
-            LoginView()
-            //mainScreen()
-            
-            
-            
-        .navigationTitle("iHelp")
-            .navigationBarItems(trailing:
-                                Button(action: {
-                isShowingSettings = true })
-                                {
-                Image(systemName: "slider.horizontal.3") //thatslider icon to open settings view
-            } //button
-             .sheet(isPresented: $isShowingSettings){
-              SideMenuView()
-    }
-                                )
+            if viewModel.signedIn{
+            VStack{
+        Text ("You are signed in")
+                Button(action:{
+                    viewModel.signOut()
+                    
+                }, label: {
+                    Text("Log out")
+                        .frame(width: 200, height: 50)
+                        .background(Color.green)
+                        .foregroundColor(Color.white)
+                        .padding()
+                })
+            }
+        }
+        else {
+           
+        LoginView()
+        }
+        }
+        .onAppear {
+
+        viewModel.signedIn=viewModel.isSignedIn
         }
 }
 }

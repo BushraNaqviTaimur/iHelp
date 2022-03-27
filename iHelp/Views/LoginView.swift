@@ -14,7 +14,7 @@ class AppViewModel: ObservableObject {
     
   
     
-    @Published var signedIn = false
+   @Published var signedIn = false
     
     var isSignedIn: Bool {
         return auth.currentUser != nil
@@ -128,6 +128,9 @@ struct LoginView: View {
                     .cornerRadius(8)
                     .background(Color.green)
             })
+            
+            NavigationLink("Don't have an account?, Sign up", destination: RegistrationForm())
+                .padding()
                     
                     
       /*      UsernameTextField(email: $email, editingMode: $editingMode)
@@ -158,14 +161,14 @@ struct LoginView: View {
                        LoginButtonContent()
                     } */
             HStack{
-                Text("Don't have an account?").foregroundColor(Color.black)
+                /*Text("Don't have an account?").foregroundColor(Color.black)
                 
                 Button( action:{
                     //action
-                    RegistrationForm()
+                    //RegistrationForm()
                 }){
                     Text("Sign Up")
-                }
+                } */
             }.padding(.top, 50)
 
                 }//end of vstack
