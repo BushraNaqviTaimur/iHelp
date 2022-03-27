@@ -74,14 +74,14 @@ struct LoginView: View {
     @State var email = ""
     @State var password = ""
     
-    @State var authenticationDidFail: Bool = false
-   @State var authenticationDidSucceed: Bool = false
+  //  @State var authenticationDidFail: Bool = false
+  // @State var authenticationDidSucceed: Bool = false
        
        @State var editingMode: Bool = false
     @State private var scale: CGFloat = 1
     
     var body: some View {
-        NavigationView{
+        /*NavigationView{
         if viewModel.signedIn{
             VStack{
         Text ("You are signed in")
@@ -89,13 +89,13 @@ struct LoginView: View {
         }
         else {
            
-        LoginView()
+        RegistrationForm()
         }
         }
         .onAppear {
 
         viewModel.signedIn=viewModel.isSignedIn
-        }
+        } */
         
         ZStack{
         VStack {
@@ -162,7 +162,7 @@ struct LoginView: View {
                 
                 Button( action:{
                     //action
-                    viewModel.signOut()
+                    RegistrationForm()
                 }){
                     Text("Sign Up")
                 }
@@ -171,7 +171,7 @@ struct LoginView: View {
                 }//end of vstack
             
             
-            if authenticationDidSucceed {
+          /*  if authenticationDidSucceed {
                             Text("Login succeeded!")
                                 .font(.headline)
                                 .frame(width: 250, height: 80)
@@ -181,7 +181,7 @@ struct LoginView: View {
                                 //change
                                 .animation(.linear(duration: 1), value: scale)
 
-                        }
+                        } */
             
             
      //end of zstack
@@ -210,6 +210,7 @@ struct Logo : View {
     }
 }
 
+/*
 struct LoginButtonContent : View {
     var body: some View {
         return Text("LOGIN")
@@ -255,4 +256,4 @@ struct PasswordSecureField : View {
             .padding()
 
     }
-}
+} */
