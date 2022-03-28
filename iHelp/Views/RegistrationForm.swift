@@ -6,9 +6,26 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+
+
+
+    let auth = Auth.auth()
+    
+  
+    
+   
+
+
+    
+
+    
 
 
 struct RegistrationForm: View {
+    
+    
+    @EnvironmentObject var viewModel: AppViewModel
     
     @State var email: String = ""
     @State var password: String = ""
@@ -18,6 +35,8 @@ struct RegistrationForm: View {
     var genderOption = ["Male", "Female", "Other"]
     @State var registerStatus: Bool = false
     @State var zero: Int = 0
+    
+    
     
 
     
@@ -34,8 +53,19 @@ struct RegistrationForm: View {
                                
                                
                                Section(header: Text("Password")) {
-                                   TextField("Password", text: $password)
-                                   TextField("Re-enter Password", text: $confirmpassword)
+                                   SecureField("Password", text: $password)
+                                   .disableAutocorrection(true)
+                                   .autocapitalization(.none)
+                                   .padding()
+                                   .background (Color(.secondarySystemBackground))
+                                   
+                                   SecureField("Re-enter Password", text: $confirmpassword)
+                                   .disableAutocorrection(true)
+                                   .autocapitalization(.none)
+                                   .padding()
+                                   .background (Color(.secondarySystemBackground))
+                                   
+                                   
 
                                    }
                                Section(header: Text("Phone")) {
@@ -61,6 +91,10 @@ struct RegistrationForm: View {
                                    
                                    
                                        self.registerStatus = true
+                                   guard !email.isEmpty, !password.isEmpty else {
+                                   return
+                                   }
+                                   viewModel.signUp(email: email, password: password)
                                }, label: {
                                    HStack {
                                        Spacer()
@@ -79,7 +113,7 @@ struct RegistrationForm: View {
                         }
                         
                         
-            }
+           }
         }
             
         /*func validationOfTextFields() -> Bool{

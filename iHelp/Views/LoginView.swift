@@ -37,8 +37,6 @@ class AppViewModel: ObservableObject {
     }
     }
     
-    
-
     func signUp(email: String, password: String) {
         auth.createUser(withEmail: email, password: password) { result, error in
             guard result != nil, error == nil else {
@@ -52,6 +50,7 @@ class AppViewModel: ObservableObject {
                                                                 
     }
     }
+
     
     func signOut() {
         
@@ -118,7 +117,7 @@ struct LoginView: View {
             guard !email.isEmpty, !password.isEmpty else {
             return
             }
-            viewModel.signIn(email: email, password: password)
+                viewModel.signIn(email: email, password: password)
                 
             },label:
             {
