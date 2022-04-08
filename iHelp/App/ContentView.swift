@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     @State private var isShowingSettings: Bool = false
     
     @EnvironmentObject var viewModel: AppViewModel
+    
+
      
     var body: some View {
           

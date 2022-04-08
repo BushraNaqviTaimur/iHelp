@@ -9,18 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 
-
-    let auth = Auth.auth()
-    
-  
-    
-   
-
-
-    
-
-    
-
+let auth = Auth.auth()
 
 struct RegistrationForm: View {
     
@@ -31,14 +20,11 @@ struct RegistrationForm: View {
     @State var password: String = ""
     @State var confirmpassword: String = ""
     @State var phoneNum: Int = 0
-    @State var genderOptionTag: Int = 0
-    var genderOption = ["Male", "Female", "Other"]
+    @State var genderOptionSelected = "Other"
+    @State var genderOption = ["Male", "Female", "Other"]
     @State var registerStatus: Bool = false
     @State var zero: Int = 0
-    
-    
-    
-
+     
     
     var body: some View {
         
@@ -74,14 +60,11 @@ struct RegistrationForm: View {
                                }
                                Section(header: Text("Gender")) {
                                    
-                                   Picker("Options", selection: $genderOptionTag)
-                                   {
-                                       Text("Options").tag(0)
-                                Text("Female").tag(1)
-                                Text("Other").tag(2)
-                                       Text("Male").tag(3)
-                                          }
-                                   
+                                   Picker("Select Gender", selection: $genderOptionSelected, content: {
+                                       ForEach(genderOption, id: \.self, content: {gender in
+                                           Text(gender)
+                                       })
+                                   })
                                           .pickerStyle(MenuPickerStyle())
                                           
                                           //Text(genderOption[genderOptionTag])
@@ -95,6 +78,7 @@ struct RegistrationForm: View {
                                    return
                                    }
                                    viewModel.signUp(email: email, password: password)
+                                   viewModel.registerUserDetails(phone: phoneNum, gender: genderOptionSelected)
                                }, label: {
                                    HStack {
                                        Spacer()

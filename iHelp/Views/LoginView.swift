@@ -5,12 +5,17 @@
 //  Created by Bushra on 1/6/22.
 //
 
+
 import SwiftUI
-import FirebaseAuth
+import Firebase
+import FirebaseFirestore
+
 
 class AppViewModel: ObservableObject {
     
     let auth = Auth.auth()
+    let db = Firestore.firestore()
+    var userID = Auth.auth().currentUser
     
   
     
@@ -45,11 +50,35 @@ class AppViewModel: ObservableObject {
             
     // Success
             DispatchQueue.main.async {
-                //self?.signedIn=true
+                self.signedIn=true
+                self.userID = Auth.auth().currentUser
         }
                                                                 
     }
     }
+    
+    func registerUserDetails(phone: Int, gender: String) {
+        
+        Auth.auth().addStateDidChangeListener { (auth, userID) in
+          if (userID != nil) {
+              self.db.collection("Users").document(userID!.uid).setData([
+              "Phone": phone,
+              "Gender": gender
+              ])
+          }
+        }
+    
+         /*{ (err) in
+            if err != nil{
+        self.alertMsg = err!.localizedDescription
+        self.alert.toggle()
+        return
+        } */
+        // Success.
+        
+    }
+    
+    
 
     
     func signOut() {
