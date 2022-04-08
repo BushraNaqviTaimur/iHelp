@@ -27,7 +27,6 @@ struct RegistrationForm: View {
      
     
     var body: some View {
-        
       
         ZStack {
             NavigationView {
