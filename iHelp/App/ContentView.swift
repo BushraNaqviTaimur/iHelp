@@ -20,7 +20,15 @@ struct ContentView: View {
         NavigationView{
             if viewModel.signedIn{
             VStack{
-        Text ("You are signed in")
+        Text ("Welcome to iHelp")
+                    .padding()
+                    .padding()
+                NavigationLink("Help Me!", destination: mainScreen())
+                VStack{
+                    
+                    NavigationLink("Map View", destination: mainScreen())
+                }
+                
                 Button(action:{
                     viewModel.signOut()
                     
@@ -31,7 +39,11 @@ struct ContentView: View {
                         .foregroundColor(Color.white)
                         .padding()
                 })
+                
+                
+                
             }
+                
         }
         else {
            

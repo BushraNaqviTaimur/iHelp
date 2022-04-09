@@ -6,7 +6,7 @@ target 'iHelp' do
   use_frameworks!
 
 
-   pod 'Firebase/Core'
+   pod 'FirebaseCore'
    pod 'Firebase/Auth'
    pod 'Firebase/Firestore'
    pod 'FirebaseFirestoreSwift'
