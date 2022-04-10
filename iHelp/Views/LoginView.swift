@@ -147,7 +147,7 @@ struct LoginView: View {
             return
             }
                 viewModel.signIn(email: email, password: password)
-                
+            
             },label:
             {
             Text ("LOGIN")

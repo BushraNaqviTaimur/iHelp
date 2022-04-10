@@ -26,7 +26,7 @@ struct ContentView: View {
                 NavigationLink("Help Me!", destination: mainScreen())
                 VStack{
                     
-                    NavigationLink("Map View", destination: mainScreen())
+                    NavigationLink("Map View", destination: MapView())
                 }
                 
                 Button(action:{

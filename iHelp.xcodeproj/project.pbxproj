@@ -10,6 +10,7 @@
 		599375C227E290FF00E452A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 599375C127E290FF00E452A6 /* GoogleService-Info.plist */; };
 		59C09CF12786359300FC06D1 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C09CF02786359300FC06D1 /* SideMenuView.swift */; };
 		59C09CF32786496100FC06D1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C09CF22786496100FC06D1 /* LoginView.swift */; };
+		59C3EB8B2802638600AFB12D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C3EB8A2802638600AFB12D /* MapView.swift */; };
 		59C9A0C6273ED39000A430A9 /* iHelpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C9A0C5273ED39000A430A9 /* iHelpApp.swift */; };
 		59C9A0C8273ED39000A430A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C9A0C7273ED39000A430A9 /* ContentView.swift */; };
 		59C9A0CA273ED39200A430A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59C9A0C9273ED39200A430A9 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 		599375C127E290FF00E452A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		59C09CF02786359300FC06D1 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		59C09CF22786496100FC06D1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		59C3EB8A2802638600AFB12D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		59C9A0C2273ED39000A430A9 /* iHelp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iHelp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59C9A0C5273ED39000A430A9 /* iHelpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iHelpApp.swift; sourceTree = "<group>"; };
 		59C9A0C7273ED39000A430A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				59C09CF22786496100FC06D1 /* LoginView.swift */,
 				59E09C05278E11D10037E83E /* RegistrationForm.swift */,
 				59E09C07279221C20037E83E /* ProfileView.swift */,
+				59C3EB8A2802638600AFB12D /* MapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				59C9A0DC273ED6F800A430A9 /* splashscreenview.swift in Sources */,
 				59C9A0DE273EDFA500A430A9 /* OnboardingView.swift in Sources */,
 				59C9A0E02751F4F000A430A9 /* mainScreen.swift in Sources */,
+				59C3EB8B2802638600AFB12D /* MapView.swift in Sources */,
 				59C9A0C8273ED39000A430A9 /* ContentView.swift in Sources */,
 				59C9A0C6273ED39000A430A9 /* iHelpApp.swift in Sources */,
 			);
