@@ -9,6 +9,8 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
+import MapKit
+import CoreLocation
 
 
 class AppViewModel: ObservableObject {
@@ -16,6 +18,7 @@ class AppViewModel: ObservableObject {
     let auth = Auth.auth()
     let db = Firestore.firestore()
     var userID = Auth.auth().currentUser
+
     
   
     
@@ -86,6 +89,26 @@ class AppViewModel: ObservableObject {
     try? auth.signOut()
         
     self.signedIn = false
+        
+    }
+    
+    
+    
+    func fetchAndSaveLocation() {
+        
+
+        let lat: Double = CLLocationManager().location?.coordinate.latitude ?? 0.0
+        let lon: Double = CLLocationManager().location?.coordinate.longitude ?? 0.0
+        
+        Auth.auth().addStateDidChangeListener { (auth, userID) in
+          if (userID != nil) {
+              self.db.collection("Locations").document(userID!.uid).setData([
+              "Latitude": lat,
+              "Longitude": lon
+              ])
+          }
+        }
+        
         
     }
     

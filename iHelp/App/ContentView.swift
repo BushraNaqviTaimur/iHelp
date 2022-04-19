@@ -8,6 +8,7 @@
 import SwiftUI
 
 
+
 struct ContentView: View {
     @State private var isShowingSettings: Bool = false
     
@@ -28,6 +29,19 @@ struct ContentView: View {
                     
                     NavigationLink("Map View", destination: MapView())
                 }
+                
+                Button(action:{
+                    viewModel.fetchAndSaveLocation()
+                    
+                }, label: {
+                    Text("Save Current Location")
+                        .frame(width: 200, height: 50)
+                        .background(Color.green)
+                        .foregroundColor(Color.white)
+                        .padding()
+                })
+                
+                .padding()
                 
                 Button(action:{
                     viewModel.signOut()
