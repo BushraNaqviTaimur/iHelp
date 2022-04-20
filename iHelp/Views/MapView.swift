@@ -111,20 +111,6 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
             //LocationManager.stopUpdatingLocation()
         }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        if let clErr = error as? CLError {
-            switch clErr {
-            case CLError.locationUnknown:
-                print("location unknown")
-            case CLError.denied:
-                print("denied")
-            default:
-                print("other Core Location error")
-            }
-        } else {
-            print("other error:", error.localizedDescription)
-        }
-    }
         
     
     

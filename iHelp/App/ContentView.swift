@@ -29,9 +29,10 @@ struct ContentView: View {
                     
                     NavigationLink("Map View", destination: MapView())
                 }
-                
+               
+                /*
                 Button(action:{
-                    //viewModel.fetchAndSaveLocationInDB()
+                    viewModel.fetchAndSaveLocationInDB()
                     
                 }, label: {
                     Text("Save Current Location")
@@ -42,7 +43,7 @@ struct ContentView: View {
                         
                 })
                 
-                .padding()
+                .padding() */
                 
                 Button(action:{
                     viewModel.signOut()
