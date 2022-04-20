@@ -31,7 +31,7 @@ struct ContentView: View {
                 }
                 
                 Button(action:{
-                    viewModel.fetchAndSaveLocation()
+                    //viewModel.fetchAndSaveLocationInDB()
                     
                 }, label: {
                     Text("Save Current Location")
@@ -39,6 +39,7 @@ struct ContentView: View {
                         .background(Color.green)
                         .foregroundColor(Color.white)
                         .padding()
+                        
                 })
                 
                 .padding()
@@ -76,3 +77,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
