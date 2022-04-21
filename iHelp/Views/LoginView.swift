@@ -17,7 +17,7 @@ class AppViewModel: ObservableObject {
     let db = Firestore.firestore()
     var userID = Auth.auth().currentUser
 
-    
+    @Published var errorMessage = "" //published variable to handle error message
   
     
    @Published var signedIn = false
@@ -30,6 +30,22 @@ class AppViewModel: ObservableObject {
 
     func signIn(email: String, password: String) {
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
+            
+            //checking error message and storing on published variable errorMessage
+            if let x = error {
+                  let err = x as NSError
+                  switch err.code {
+                  case AuthErrorCode.wrongPassword.rawValue:
+                      self?.errorMessage="Wrong password, please try again."
+                  case AuthErrorCode.invalidEmail.rawValue:
+                      self?.errorMessage="Invalid email, please enter registered ID"
+                  case AuthErrorCode.accountExistsWithDifferentCredential.rawValue:
+                      self?.errorMessage="This account already exists."
+                  default:
+                      print("unknown error: \(err.localizedDescription)")
+                  }
+              }
+            
             guard result != nil, error == nil else {
                 return
             }
@@ -45,6 +61,19 @@ class AppViewModel: ObservableObject {
     
     func signUp(email: String, password: String) {
         auth.createUser(withEmail: email, password: password) { result, error in
+            
+            //checking error message and storing on published variable errorMessage
+            if let x = error {
+                  let err = x as NSError
+                  switch err.code {
+                  case AuthErrorCode.accountExistsWithDifferentCredential.rawValue:
+                      self.errorMessage="This account already exists."
+                  default:
+                      self.errorMessage="\(err.localizedDescription)"
+
+                  }
+              }
+            
             guard result != nil, error == nil else {
                 return
             }
@@ -97,6 +126,8 @@ class AppViewModel: ObservableObject {
     
 }
 
+
+
 //let storedUsername = "Myusername"
 //let storedPassword = "Mypassword"
 
@@ -106,6 +137,9 @@ struct LoginView: View {
     
     @State var email = ""
     @State var password = ""
+    
+    
+
     
   //  @State var authenticationDidFail: Bool = false
   // @State var authenticationDidSucceed: Bool = false
@@ -135,11 +169,16 @@ struct LoginView: View {
             
             Logo()
             
+            
+            
+  
+            
             TextField("Email Address", text: $email)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
                 .padding()
                 .background(Color(.secondarySystemBackground))
+                
             
             SecureField("Password", text: $password)
             .disableAutocorrection(true)
@@ -147,23 +186,48 @@ struct LoginView: View {
             .padding()
             .background (Color(.secondarySystemBackground))
             
+            
+            Label {
+                Text("\(self.viewModel.errorMessage)")
+                    .foregroundColor(Color.red)
+            } icon: {
+                Image(systemName: "markx")
+                    .foregroundColor(Color.red)
+            }
+            
+            .padding()
+
+            
+            
             Button(action: {
             guard !email.isEmpty, !password.isEmpty else {
             return
             }
+                
                 viewModel.signIn(email: email, password: password)
-            
-            },label:
+                
+                self.viewModel.errorMessage="" //clearing error message so that UI is clean on sign out
+            }
+                   
+                   
+                   ,label:
             {
             Text ("LOGIN")
                     .foregroundColor(Color.white)
                     .frame (width: 200, height: 50)
                     .cornerRadius(8)
-                    .background(Color.green)
+                    .background(Color.blue)
+                    .padding()
             })
+            .disabled(self.email.isEmpty)
+            .disabled(self.password.isEmpty)
             
-            NavigationLink("Don't have an account?, Sign up", destination: RegistrationForm())
+            
+            
+            NavigationLink("Don't have an account? Sign up", destination: RegistrationForm())
                 .padding()
+                .foregroundColor(Color.blue)
+            
                     
                     
       /*      UsernameTextField(email: $email, editingMode: $editingMode)

@@ -22,15 +22,22 @@ struct RegistrationForm: View {
     @State var phoneNum: Int = 0
     @State var genderOptionSelected = "Other"
     @State var genderOption = ["Male", "Female", "Other"]
-    @State var registerStatus: Bool = false
+    //@State var registerStatus: Bool = false
     @State var zero: Int = 0
      
     
     var body: some View {
       
         ZStack {
+            
+            
+            
             NavigationView {
                            Form {
+                               
+                               
+                               
+                               
                                   Section(header: Text("EMAIL")) {
                                        TextField("Email", text: $email)
                                        
@@ -69,30 +76,51 @@ struct RegistrationForm: View {
                                           //Text(genderOption[genderOptionTag])
                                
                                }
+                               
+                               Label {
+                                   Text("\(self.viewModel.errorMessage)")
+                                       .foregroundColor(Color.red)
+                                       
+                               } icon: {
+                                   Image(systemName: "markx")
+                                       .foregroundColor(Color.red)
+                               }
+                               
+                               
                                Button(action: {
                                    
                                    
-                                       self.registerStatus = true
+                                       //self.registerStatus = true
                                    guard !email.isEmpty, !password.isEmpty else {
                                    return
                                    }
                                    viewModel.signUp(email: email, password: password)
                                    viewModel.registerUserDetails(phone: phoneNum, gender: genderOptionSelected)
+                                   self.viewModel.errorMessage="" //clearing error message so that UI is clean on sign out
                                }, label: {
                                    HStack {
                                        Spacer()
-                                       Text(registerStatus ? "Registered" : "Register")
+                                       //Text(registerStatus ? "Registered" : "Register")
+                                       Text("Register")
                                        Spacer()
                                    }
-                               }).disabled(registerStatus)
+                               })//.disabled(registerStatus)
+                                   .disabled(self.email.isEmpty)
+                                   .disabled(self.password.isEmpty)
+                                   .disabled(self.confirmpassword.isEmpty)
+                                   .disabled(self.phoneNum==0)
+                               
+                               
                                
                                    }.navigationBarTitle(Text("iHelp"), displayMode: .large )
                     .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.white]), startPoint: .top, endPoint: .bottomTrailing))
                         .onAppear { // ADD THESE
                           UITableView.appearance().backgroundColor = .clear
+                            self.viewModel.errorMessage="" //clearing error message so that UI is clean on load
                         }
                         .onDisappear {
                           UITableView.appearance().backgroundColor = .systemGroupedBackground
+                            self.viewModel.errorMessage="" //clearing error message so that UI is clean on Back
                         }
                         
                         
