@@ -94,9 +94,17 @@ struct RegistrationForm: View {
                                    guard !email.isEmpty, !password.isEmpty else {
                                    return
                                    }
+                                   
+                                   if password==confirmpassword
+                                   {
                                    viewModel.signUp(email: email, password: password)
                                    viewModel.registerUserDetails(phone: phoneNum, gender: genderOptionSelected)
                                    self.viewModel.errorMessage="" //clearing error message so that UI is clean on sign out
+                                   }
+                                   else
+                                   {
+                                       self.viewModel.errorMessage="Password and confirm password are not same."
+                                   }
                                }, label: {
                                    HStack {
                                        Spacer()
