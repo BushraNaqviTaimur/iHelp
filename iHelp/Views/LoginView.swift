@@ -18,6 +18,8 @@ class AppViewModel: ObservableObject {
     var userID = Auth.auth().currentUser
 
     @Published var errorMessage = "" //published variable to handle error message
+    
+   
   
     
    @Published var signedIn = false
@@ -138,6 +140,9 @@ struct LoginView: View {
     @State var email = ""
     @State var password = ""
     
+    @FocusState private var nameIsFocused: Bool //to dismiss keyboard once Login button is pressed so that
+    //UI is cleared.
+    
     
 
     
@@ -178,6 +183,8 @@ struct LoginView: View {
                 .autocapitalization(.none)
                 .padding()
                 .background(Color(.secondarySystemBackground))
+                .focused($nameIsFocused) //added to dismiss keyboard once Login button is pressed so that
+            //UI is cleared.
                 
             
             SecureField("Password", text: $password)
@@ -185,6 +192,8 @@ struct LoginView: View {
             .autocapitalization(.none)
             .padding()
             .background (Color(.secondarySystemBackground))
+            .focused($nameIsFocused) //added to dismiss keyboard once Login button is pressed so that
+            //UI is cleared.
             
             
             Label {
@@ -207,6 +216,9 @@ struct LoginView: View {
                 viewModel.signIn(email: email, password: password)
                 
                 self.viewModel.errorMessage="" //clearing error message so that UI is clean on sign out
+                
+                nameIsFocused = false //added to dismiss keyboard once Login button is pressed so that
+                //UI is cleared.
             }
                    
                    
@@ -218,6 +230,7 @@ struct LoginView: View {
                     .cornerRadius(8)
                     .background(Color.blue)
                     .padding()
+                
             })
             .disabled(self.email.isEmpty)
             .disabled(self.password.isEmpty)
