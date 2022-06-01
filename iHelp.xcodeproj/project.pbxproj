@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5930486328453F93000A7F03 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5930486228453F93000A7F03 /* LocationViewModel.swift */; };
+		5930486728454888000A7F03 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5930486628454888000A7F03 /* Users.swift */; };
 		599375C227E290FF00E452A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 599375C127E290FF00E452A6 /* GoogleService-Info.plist */; };
 		59C09CF12786359300FC06D1 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C09CF02786359300FC06D1 /* SideMenuView.swift */; };
 		59C09CF32786496100FC06D1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C09CF22786496100FC06D1 /* LoginView.swift */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		359EC79B6DE25E30BDCD26E2 /* Pods-iHelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iHelp.debug.xcconfig"; path = "Target Support Files/Pods-iHelp/Pods-iHelp.debug.xcconfig"; sourceTree = "<group>"; };
+		5930486228453F93000A7F03 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		5930486628454888000A7F03 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		599375C127E290FF00E452A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		59C09CF02786359300FC06D1 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		59C09CF22786496100FC06D1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -64,9 +68,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5930485F284537EB000A7F03 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5930486228453F93000A7F03 /* LocationViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		59C9A0B9273ED39000A430A9 = {
 			isa = PBXGroup;
 			children = (
+				5930485F284537EB000A7F03 /* ViewModels */,
 				59C9A0C4273ED39000A430A9 /* iHelp */,
 				59C9A0C3273ED39000A430A9 /* Products */,
 				8765DF29C648EECCCB4DE0C9 /* Pods */,
@@ -128,6 +141,7 @@
 		59C9A0D9273ED60400A430A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5930486628454888000A7F03 /* Users.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -271,7 +285,9 @@
 				59E09C08279221C20037E83E /* ProfileView.swift in Sources */,
 				59C09CF12786359300FC06D1 /* SideMenuView.swift in Sources */,
 				59C09CF32786496100FC06D1 /* LoginView.swift in Sources */,
+				5930486728454888000A7F03 /* Users.swift in Sources */,
 				59C9A0DC273ED6F800A430A9 /* splashscreenview.swift in Sources */,
+				5930486328453F93000A7F03 /* LocationViewModel.swift in Sources */,
 				59C9A0DE273EDFA500A430A9 /* OnboardingView.swift in Sources */,
 				59C9A0E02751F4F000A430A9 /* mainScreen.swift in Sources */,
 				59C3EB8B2802638600AFB12D /* MapView.swift in Sources */,

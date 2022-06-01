@@ -22,6 +22,7 @@ struct MapView: View {
             .accentColor(Color(.systemPurple))
             .onAppear {
                 viewModel.checkifLocatinServicesIsEnabled()
+              //  viewModel.fetchData()
             }
     }
     
@@ -78,9 +79,12 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
             region = MKCoordinateRegion(center: LocationManager.location!.coordinate,
                                         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
            LocationManager.allowsBackgroundLocationUpdates =  true
-           //LocationManager.startUpdatingLocation()
-           LocationManager.startMonitoringSignificantLocationChanges()
+           ///
+       //LocationManager.startUpdatingLocation()
+   LocationManager.startMonitoringSignificantLocationChanges()
+           ///
            fetchAndSaveLocationInDB()
+           fetchData()
        case .authorizedWhenInUse:
            region = MKCoordinateRegion(center: LocationManager.location!.coordinate,
                                        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
@@ -89,6 +93,7 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
           //LocationManager.stopUpdatingLocation()
           LocationManager.startMonitoringSignificantLocationChanges()
           fetchAndSaveLocationInDB()
+           fetchData()
         @unknown default:
             break
         }
@@ -118,13 +123,14 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
         
         CLLocationManager().requestAlwaysAuthorization()
         
-        
+        let uuid: String = Auth.auth().currentUser!.uid ?? ""
         let lat: Double = CLLocationManager().location?.coordinate.latitude ?? 0.0
         let lon: Double = CLLocationManager().location?.coordinate.longitude ?? 0.0
         
         Auth.auth().addStateDidChangeListener { (auth, userID) in
           if (userID != nil) {
               self.db.collection("Locations").document(userID!.uid).setData([
+              "UserID": uuid,
               "Latitude": lat,
               "Longitude": lon
               ])
@@ -148,6 +154,43 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
         
     }
     
+    
+    ///
+    @Published var user = [Users] ()
+    
+    
+  //let db2 = Firestore.firestore()
+    
+    
+    func fetchData() {
+        db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print ("No document")
+                return
+            }
+            
+            self.user = documents.map {(queryDocumentSnapshot) -> Users in
+                let data = queryDocumentSnapshot.data()
+                
+              
+                let UiD = data["UserID"]as? String ?? ""
+                let Latitude = data["Latitude"]as? Double ?? 0.0
+                let Longitude = data["Longitude"]as? Double ?? 0.0
+                
+                
+                
+                
+                //self.user.append(data)
+                
+                return Users(Latitude : Latitude, Longitude: Longitude)
+            }
+                 
+            }
+            
+            
+            
+            
+        }
     
 }
 
