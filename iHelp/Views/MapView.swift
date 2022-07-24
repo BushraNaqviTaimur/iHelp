@@ -12,36 +12,47 @@ import FirebaseFirestore
 struct MapView: View {
     
     @StateObject private var viewModel = MapViewModel()
+    
+    @Binding var annotations:UserPin!
 
-    
-  
-    
+   
     var body: some View {
-        Map(coordinateRegion: $viewModel.region, showsUserLocation: true )
+        Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: annotations){ annotation in
+            MapPin(coordinate: annotation.coordinate)
+        }
             .ignoresSafeArea()
             .accentColor(Color(.systemPurple))
             .onAppear {
                 viewModel.checkifLocatinServicesIsEnabled()
+                
               //  viewModel.fetchData()
             }
     }
     
 }
 
-
+struct UserPin: Identifiable {
+    let id = UUID()
+    let user: String
+    var coordinate: CLLocationCoordinate2D
+}
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView()
+        MapView(annotations: <#Binding<UserPin?>#>)
     }
 }
 
 //added delegate now bcox we want to listen if user changes locarion permission status
 final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate {
     
+    
+    
     let auth = Auth.auth()
     let db = Firestore.firestore()
     var userID = Auth.auth().currentUser
+    
+    
     
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
     //this changes so ui will be updated
@@ -84,7 +95,35 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
    LocationManager.startMonitoringSignificantLocationChanges()
            ///
            fetchAndSaveLocationInDB()
-           fetchData()
+           db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
+               guard let documents = querySnapshot?.documents else {
+                   print ("No document")
+                   return
+               }
+               
+               self.user = documents.map {(queryDocumentSnapshot) -> Users in
+                   let data = queryDocumentSnapshot.data()
+                   
+                 
+                   //fetching each user location
+                   let UiD = data["UserID"]as? String ?? ""
+                   let Latitude = data["Latitude"]as? Double ?? 0.0
+                   let Longitude = data["Longitude"]as? Double ?? 0.0
+                   
+                   
+                   //plotting each user
+                   annotations =  UserPin(user: UiD, coordinate: CLLocationCoordinate2D(latitude: Latitude, longitude: Longitude))
+                       
+
+                   
+                   
+                   //self.user.append(data)
+                   
+                   return Users(Latitude : Latitude, Longitude: Longitude)
+               }
+                    
+               }
+           
        case .authorizedWhenInUse:
            region = MKCoordinateRegion(center: LocationManager.location!.coordinate,
                                        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
@@ -93,7 +132,7 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
           //LocationManager.stopUpdatingLocation()
           LocationManager.startMonitoringSignificantLocationChanges()
           fetchAndSaveLocationInDB()
-           fetchData()
+          // fetchDataAndPlotNearby()
         @unknown default:
             break
         }
@@ -162,7 +201,7 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
   //let db2 = Firestore.firestore()
     
     
-    func fetchData() {
+    func fetchDataAndPlotNearby() {
         db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print ("No document")
@@ -173,11 +212,14 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
                 let data = queryDocumentSnapshot.data()
                 
               
+                //fetching each user location
                 let UiD = data["UserID"]as? String ?? ""
                 let Latitude = data["Latitude"]as? Double ?? 0.0
                 let Longitude = data["Longitude"]as? Double ?? 0.0
                 
                 
+                //plotting each user
+
                 
                 
                 //self.user.append(data)
@@ -186,9 +228,6 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
             }
                  
             }
-            
-            
-            
             
         }
     
