@@ -96,12 +96,15 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
    LocationManager.startMonitoringSignificantLocationChanges()
            ///
            fetchAndSaveLocationInDB()
-           db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
+           
+            db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
                guard let documents = querySnapshot?.documents else {
                    print ("No document")
                    return
                }
-               
+                //resetting the value before every change of pin user location
+                self.annotations=[UserPin(user: "", coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0))]
+                
                self.user = documents.map {(queryDocumentSnapshot) -> Users in
                    let data = queryDocumentSnapshot.data()
                    
@@ -202,7 +205,7 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
   //let db2 = Firestore.firestore()
     
     
-    func fetchDataAndPlotNearby() {
+  /*  func fetchDataAndPlotNearby() {
         db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print ("No document")
@@ -230,7 +233,7 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
                  
             }
             
-        }
+        } */
     
 }
 
