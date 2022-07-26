@@ -13,63 +13,90 @@ struct ContentView: View {
     @State private var isShowingSettings: Bool = false
     
     @EnvironmentObject var viewModel: AppViewModel
-    
-
      
     var body: some View {
-          
+        
         NavigationView{
             if viewModel.signedIn{
-            VStack{
-        Text ("Welcome to iHelp")
-                    .padding()
-                    .padding()
-                NavigationLink("Help Me!", destination: mainScreen())
+        
+        ZStack{
                 VStack{
+                Spacer()
+
                     
-                    NavigationLink("Map View", destination: MapView())
-                }
-               
-                /*
-                Button(action:{
-                    viewModel.fetchAndSaveLocationInDB()
+                        Spacer()
+                        Button( action: {},
+                                label:
+                                    {
+                            NavigationLink(destination: mainScreen())
+                            {
+                            Text("iHelp Me")
+                                .fontWeight(.bold)
+                                .font(.title)
+                                .padding()
+                                .background(Color.red)
+                            
+                                .cornerRadius(70)
+                                .foregroundColor(.white)
+                                .padding(10)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.purple, lineWidth: 5))
+                            }
+                        })
                     
-                }, label: {
-                    Text("Save Current Location")
-                        .frame(width: 200, height: 50)
-                        .background(Color.green)
-                        .foregroundColor(Color.white)
-                        .padding()
+                    Spacer()
+                    
+                    Button( action: {},
+                            label:
+                                {
+                        NavigationLink(destination: MapView())
+                        {Text("Map View")
+                            .fontWeight(.bold)
+                            .font(.title)
+                            .padding()
+                            .background(Color.white)
                         
-                })
-                
-                .padding() */
-                
-                Button(action:{
-                    viewModel.signOut()
+                            .cornerRadius(70)
+                            .foregroundColor(.purple)
+                            .padding(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 40)
+                                    .stroke(Color.purple, lineWidth: 5))
+                        }
+                    })
                     
-                }, label: {
-                    Text("Log out")
-                        .frame(width: 200, height: 50)
-                        .background(Color.green)
-                        .foregroundColor(Color.white)
-                        .padding()
-                })
+                    Button(action:{
+                        viewModel.signOut()
+                        
+                    }, label: {
+                        Text("Sign Out")
+                            .frame(width: 200, height: 50)
+                            .background(Color.green)
+                            .foregroundColor(Color.white)
+                            .padding()
+                    })
+                    
+                        //Spacer()
                 
-                
+                }//end of vstack1
+          
+     //end of zstack
+                }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                .accentColor(Color.black)
+            .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.white]), startPoint: .leading, endPoint: .trailing))
                 
             }
-                
-        }
-        else {
-           
-        LoginView()
-        }
-        }
-        .onAppear {
+            else {
+               
+            LoginView()
+            }
+            }
+            .onAppear {
 
-        viewModel.signedIn=viewModel.isSignedIn
-        }
+            viewModel.signedIn=viewModel.isSignedIn
+            }
+       
 }
 }
                                 

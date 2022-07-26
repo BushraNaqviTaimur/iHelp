@@ -51,8 +51,9 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
     let auth = Auth.auth()
     let db = Firestore.firestore()
     var userID = Auth.auth().currentUser
-    
     @Published var annotations:[UserPin] = []
+    
+    
     
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
     //this changes so ui will be updated
