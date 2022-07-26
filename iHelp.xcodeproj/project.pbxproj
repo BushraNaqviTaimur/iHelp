@@ -19,7 +19,7 @@
 		59C9A0CD273ED39200A430A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59C9A0CC273ED39200A430A9 /* Preview Assets.xcassets */; };
 		59C9A0DC273ED6F800A430A9 /* splashscreenview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C9A0DB273ED6F800A430A9 /* splashscreenview.swift */; };
 		59C9A0DE273EDFA500A430A9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C9A0DD273EDFA500A430A9 /* OnboardingView.swift */; };
-		59C9A0E02751F4F000A430A9 /* mainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C9A0DF2751F4F000A430A9 /* mainScreen.swift */; };
+		59C9A0E02751F4F000A430A9 /* DistressSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C9A0DF2751F4F000A430A9 /* DistressSignal.swift */; };
 		59E09C06278E11D10037E83E /* RegistrationForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E09C05278E11D10037E83E /* RegistrationForm.swift */; };
 		59E09C08279221C20037E83E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E09C07279221C20037E83E /* ProfileView.swift */; };
 		7550EA8376CB075A24176EA1 /* Pods_iHelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB524DCA0E83D31D653F6026 /* Pods_iHelp.framework */; };
@@ -41,7 +41,7 @@
 		59C9A0CC273ED39200A430A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		59C9A0DB273ED6F800A430A9 /* splashscreenview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splashscreenview.swift; sourceTree = "<group>"; };
 		59C9A0DD273EDFA500A430A9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		59C9A0DF2751F4F000A430A9 /* mainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainScreen.swift; sourceTree = "<group>"; };
+		59C9A0DF2751F4F000A430A9 /* DistressSignal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistressSignal.swift; sourceTree = "<group>"; };
 		59E09C05278E11D10037E83E /* RegistrationForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationForm.swift; sourceTree = "<group>"; };
 		59E09C07279221C20037E83E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AD341FDFFC3CDB19BD76AE2C /* Pods-iHelp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iHelp.release.xcconfig"; path = "Target Support Files/Pods-iHelp/Pods-iHelp.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				59C9A0DB273ED6F800A430A9 /* splashscreenview.swift */,
-				59C9A0DF2751F4F000A430A9 /* mainScreen.swift */,
+				59C9A0DF2751F4F000A430A9 /* DistressSignal.swift */,
 				59C09CF02786359300FC06D1 /* SideMenuView.swift */,
 				59C09CF22786496100FC06D1 /* LoginView.swift */,
 				59E09C05278E11D10037E83E /* RegistrationForm.swift */,
@@ -289,7 +289,7 @@
 				59C9A0DC273ED6F800A430A9 /* splashscreenview.swift in Sources */,
 				5930486328453F93000A7F03 /* LocationViewModel.swift in Sources */,
 				59C9A0DE273EDFA500A430A9 /* OnboardingView.swift in Sources */,
-				59C9A0E02751F4F000A430A9 /* mainScreen.swift in Sources */,
+				59C9A0E02751F4F000A430A9 /* DistressSignal.swift in Sources */,
 				59C3EB8B2802638600AFB12D /* MapView.swift in Sources */,
 				59C9A0C8273ED39000A430A9 /* ContentView.swift in Sources */,
 				59C9A0C6273ED39000A430A9 /* iHelpApp.swift in Sources */,

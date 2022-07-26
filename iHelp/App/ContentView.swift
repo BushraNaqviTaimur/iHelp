@@ -28,7 +28,7 @@ struct ContentView: View {
                         Button( action: {},
                                 label:
                                     {
-                            NavigationLink(destination: mainScreen())
+                            NavigationLink(destination: DistressSignal())
                             {
                             Text("iHelp Me")
                                 .fontWeight(.bold)
