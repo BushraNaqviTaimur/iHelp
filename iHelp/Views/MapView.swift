@@ -13,11 +13,11 @@ struct MapView: View {
     
     @StateObject private var viewModel = MapViewModel()
     
-    @Binding var annotations:UserPin!
+    
 
    
     var body: some View {
-        Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: annotations){ annotation in
+        Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: $viewModel.annotations){ $annotation in
             MapPin(coordinate: annotation.coordinate)
         }
             .ignoresSafeArea()
@@ -39,7 +39,7 @@ struct UserPin: Identifiable {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(annotations: <#Binding<UserPin?>#>)
+        MapView()
     }
 }
 
@@ -52,7 +52,7 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
     let db = Firestore.firestore()
     var userID = Auth.auth().currentUser
     
-    
+    @Published var annotations:[UserPin] = []
     
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0,longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
     //this changes so ui will be updated
@@ -112,9 +112,9 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
                    
                    
                    //plotting each user
-                   annotations =  UserPin(user: UiD, coordinate: CLLocationCoordinate2D(latitude: Latitude, longitude: Longitude))
+                   self.annotations += [UserPin(user: UiD, coordinate: CLLocationCoordinate2D(latitude: Latitude, longitude: Longitude))]
                        
-
+                   
                    
                    
                    //self.user.append(data)
