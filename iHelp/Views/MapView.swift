@@ -96,7 +96,6 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
    LocationManager.startMonitoringSignificantLocationChanges()
            ///
            fetchAndSaveLocationInDB()
-           
             db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
                guard let documents = querySnapshot?.documents else {
                    print ("No document")
@@ -136,7 +135,36 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
           //LocationManager.stopUpdatingLocation()
           LocationManager.startMonitoringSignificantLocationChanges()
           fetchAndSaveLocationInDB()
-          // fetchDataAndPlotNearby()
+           db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
+              guard let documents = querySnapshot?.documents else {
+                  print ("No document")
+                  return
+              }
+               //resetting the value before every change of pin user location
+               self.annotations=[UserPin(user: "", coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0))]
+               
+              self.user = documents.map {(queryDocumentSnapshot) -> Users in
+                  let data = queryDocumentSnapshot.data()
+                  
+                
+                  //fetching each user location
+                  let UiD = data["UserID"]as? String ?? ""
+                  let Latitude = data["Latitude"]as? Double ?? 0.0
+                  let Longitude = data["Longitude"]as? Double ?? 0.0
+                  
+                  
+                  //plotting each user
+                  self.annotations += [UserPin(user: UiD, coordinate: CLLocationCoordinate2D(latitude: Latitude, longitude: Longitude))]
+                      
+                  
+                  
+                  
+                  //self.user.append(data)
+                  
+                  return Users(Latitude : Latitude, Longitude: Longitude)
+              }
+                   
+              }
         @unknown default:
             break
         }
