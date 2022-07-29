@@ -29,7 +29,7 @@ struct DistressSignal: View {
 
                     
                     Button(action:{
-                        viewModel.fetchNearByUsersFromDB()
+                        viewModel.fetchNearByUsersFromDBAndSendSMS()
                         
 
                         
@@ -65,13 +65,19 @@ class DistressSignalModel: ObservableObject {
     @Published var myLat:Double!
     @Published var myLon:Double!
     
+    @Published var NumberToMessage: [Any] = [8]
+    @Published var SMSToMessage = ""
+    
+    
     //@Published var results:String!
     
     
     
     @Published var user = [Users] ()
     
-    func fetchNearByUsersFromDB() {
+    
+    
+    func fetchNearByUsersFromDBAndSendSMS() {
         
     db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
        guard let documents = querySnapshot?.documents else {
@@ -95,7 +101,14 @@ class DistressSignalModel: ObservableObject {
                self.myLon=Longitude
            }
            
-     
+           
+           //creating SMS to send with Google Maps location URL of current signed in user
+           
+           let StrLat = String(describing: self.myLat)
+           let StrLon = String(describing: self.myLon)
+           
+           self.SMSToMessage = "Message from iHelp: Please help me at http://maps.google.com/maps?q="+StrLat+","+StrLon
+           
            //self.user.append(data)
            
            return Users(Latitude : Latitude, Longitude: Longitude)
@@ -151,6 +164,44 @@ class DistressSignalModel: ObservableObject {
         }
         
        }
+        
+        fetchNumbersOfNearByUsers()
+        
+        let sms: String = "sms:\(self.NumberToMessage)&body=\(self.SMSToMessage)"
+        let strURL: String = sms.addingPercentEncoding(withAllowedCharacters:.urlQueryAllowed)!
+        UIApplication.shared.open(URL.init(string: strURL)!, options: [:], completionHandler:
+        nil)
+        
+    }
+    
+    func fetchNumbersOfNearByUsers(){
+    
+        db.collection("Users").addSnapshotListener { (querySnapshot, error) in
+           guard let documents = querySnapshot?.documents else {
+               print ("No document")
+               return
+           }
+            
+      
+            self.user = documents.map {(queryDocumentSnapshot) -> Users in
+               let data = queryDocumentSnapshot.data()
+               
+               //fetching phone numbers
+                var count:Int = 0
+                
+                self.NumberToMessage[count] = data["Phone"]
+                
+                count = count+1
+               
+
+                
+                
+                //print(data["Phone"])
+               
+                return Users(Latitude : 0.0, Longitude: 0.0)
+           }
+        }
+        
     }
     
     

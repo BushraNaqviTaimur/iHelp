@@ -114,10 +114,12 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
                    let Longitude = data["Longitude"]as? Double ?? 0.0
                    
                    
+                   if UiD != self.userID?.uid
+                   {
                    //plotting each user
                    self.annotations += [UserPin(user: UiD, coordinate: CLLocationCoordinate2D(latitude: Latitude, longitude: Longitude))]
                        
-                   
+                   }
                    
                    
                    //self.user.append(data)
@@ -153,10 +155,12 @@ final class MapViewModel: NSObject ,ObservableObject, CLLocationManagerDelegate 
                   let Longitude = data["Longitude"]as? Double ?? 0.0
                   
                   
+                  if UiD != self.userID?.uid
+                  {
                   //plotting each user
                   self.annotations += [UserPin(user: UiD, coordinate: CLLocationCoordinate2D(latitude: Latitude, longitude: Longitude))]
                       
-                  
+                  }
                   
                   
                   //self.user.append(data)
