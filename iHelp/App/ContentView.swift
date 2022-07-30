@@ -21,8 +21,8 @@ struct ContentView: View {
         
         ZStack{
                 VStack{
-                Spacer()
-
+               
+                        
                     
                         Spacer()
                         Button( action: {},
@@ -30,7 +30,7 @@ struct ContentView: View {
                                     {
                             NavigationLink(destination: DistressSignal())
                             {
-                            Text("iHelp Me")
+                            Text("Help Me")
                                 .fontWeight(.bold)
                                 .font(.title)
                                 .padding()
@@ -47,7 +47,8 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    Button( action: {},
+                    
+                   /* Button( action: {},
                             label:
                                 {
                         NavigationLink(destination: MapView())
@@ -64,7 +65,7 @@ struct ContentView: View {
                                 RoundedRectangle(cornerRadius: 40)
                                     .stroke(Color.purple, lineWidth: 5))
                         }
-                    })
+                    })*/
                     
                     Button(action:{
                         viewModel.signOut()
@@ -76,9 +77,9 @@ struct ContentView: View {
                             .foregroundColor(Color.white)
                             .padding()
                     })
-                    
+                     
                         //Spacer()
-                
+                     
                 }//end of vstack1
           
      //end of zstack
@@ -88,10 +89,10 @@ struct ContentView: View {
                 
             }
             else {
-               
+            
             LoginView()
             }
-            }
+            }//end of nav
             .onAppear {
 
             viewModel.signedIn=viewModel.isSignedIn
@@ -102,7 +103,8 @@ struct ContentView: View {
                                 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(AppViewModel())
     }
 }
+
 

@@ -99,7 +99,7 @@ class AppViewModel: ObservableObject {
               ])
           }
         }
-    
+    }
          /*{ (err) in
             if err != nil{
         self.alertMsg = err!.localizedDescription
@@ -108,7 +108,7 @@ class AppViewModel: ObservableObject {
         } */
         // Success.
         
-    }
+    
     
     
 
@@ -306,7 +306,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView().environmentObject(AppViewModel())
     }
 }
 

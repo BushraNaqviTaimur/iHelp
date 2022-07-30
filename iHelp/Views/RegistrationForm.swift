@@ -60,7 +60,7 @@ struct RegistrationForm: View {
                                    
 
                                    }
-                               Section(header: Text("Phone")) {
+                               Section(header: Text("Mobile Number")) {
                                    TextField("Phone number", value: $phoneNum,formatter: NumberFormatter())
                                    
                                }
@@ -120,21 +120,25 @@ struct RegistrationForm: View {
                                
                                
                                
-                                   }.navigationBarTitle(Text("iHelp"), displayMode: .large )
-                    .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.white]), startPoint: .top, endPoint: .bottomTrailing))
-                        .onAppear { // ADD THESE
+                                   }
+                           .navigationBarTitle(Text("iHelp"), displayMode: .large )
+                           .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.white]), startPoint: .top, endPoint: .bottomTrailing))
+                         .onAppear { // ADD THESE
                           UITableView.appearance().backgroundColor = .clear
                             self.viewModel.errorMessage="" //clearing error message so that UI is clean on load
-                        }
+                                    }
                         .onDisappear {
                           UITableView.appearance().backgroundColor = .systemGroupedBackground
                             self.viewModel.errorMessage="" //clearing error message so that UI is clean on Back
-                        }
+                                     }
                         
                         
-           }
-        }
+           }//end of nav
+        }//end of zstack
             
+        
+        
+        
         /*func validationOfTextFields() -> Bool{
             var a = false
             if( password.isEmpty || confirmpassword.isEmpty || email.isEmpty
@@ -171,7 +175,7 @@ struct RegistrationForm: View {
 
 struct RegistrationForm_Previews: PreviewProvider {
     static var previews: some View {
-        RegistrationForm()
+        RegistrationForm().environmentObject(AppViewModel())
     }
 }
 

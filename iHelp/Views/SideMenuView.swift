@@ -18,7 +18,7 @@ struct SideMenuView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack //(alignment: .leading)
                 {
-                    HStack {
+                    /*HStack {
                         
                         Button(action: {
                            //action
@@ -57,13 +57,14 @@ struct SideMenuView: View {
                             }
                             
                                 .padding()
-                            }
+                            }*/
                 Spacer()
                     
                 }//end of vstack
                 
                 
                 .navigationBarTitle(Text("iHelp"), displayMode: .large )
+              
             
             .navigationBarItems(
                 trailing:
@@ -77,10 +78,12 @@ struct SideMenuView: View {
             .padding()
             
             }//end of scrollview
-            
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.white]), startPoint: .top, endPoint: .bottomTrailing))
         }//end of navigation view
         
-       
+        
+            
     }
 }
 
