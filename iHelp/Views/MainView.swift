@@ -15,9 +15,14 @@ struct MainView: View {
     var body: some View {
          //Text("fdc")
         
+        
+        NavigationView{
+            
+            if viewModel.signedIn{
+                
         ZStack{
         
-            if viewModel.signedIn{
+           
         
         VStack{ //v2
         TabView (){
@@ -45,20 +50,26 @@ struct MainView: View {
                 
 }//end of tabview
         
-        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        //.indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         }//end of vstack2
         
-        }else {
-            
-            LoginView()
         }
-        }//end of zstack
-    }
+                
+            }else {
+                
+                LoginView()
+            }
+
+        
+        }.onAppear {
+        
+        viewModel.signedIn=viewModel.isSignedIn
+        }
     
+}
 }
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-            .environmentObject(AppViewModel())
     }
 }

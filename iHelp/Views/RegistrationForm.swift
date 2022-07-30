@@ -123,6 +123,7 @@ struct RegistrationForm: View {
                                    }
                            .navigationBarTitle(Text("iHelp"), displayMode: .large )
                            .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.white]), startPoint: .top, endPoint: .bottomTrailing))
+                           
                          .onAppear { // ADD THESE
                           UITableView.appearance().backgroundColor = .clear
                             self.viewModel.errorMessage="" //clearing error message so that UI is clean on load
@@ -134,6 +135,7 @@ struct RegistrationForm: View {
                         
                         
            }//end of nav
+            .edgesIgnoringSafeArea(.top)
         }//end of zstack
             
         

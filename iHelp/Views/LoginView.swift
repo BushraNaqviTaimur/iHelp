@@ -122,9 +122,25 @@ class AppViewModel: ObservableObject {
     }
     
     
-    
-    
-    
+    func UpdateUserDetails(phone: Int, email: String) {
+        
+        let db = Firestore.firestore()
+        //let userID = Auth.auth().currentUser?.uid
+        Auth.auth().addStateDidChangeListener { (auth, userID) in
+          if (userID != nil) {
+              db.collection("Users").document(userID!.uid).updateData([
+              "Phone": phone,
+              "Email": email
+              ])
+          }
+        }
+    }
+
+    func setpass ( password : String){
+    Auth.auth().currentUser?.updatePassword(to: password) { error in
+      // ...
+    }
+    }
     
 }
 
@@ -306,7 +322,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView().environmentObject(AppViewModel())
+        LoginView()
     }
 }
 
