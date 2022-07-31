@@ -24,6 +24,7 @@ struct RegistrationForm: View {
     @State var genderOption = ["Male", "Female", "Other"]
     //@State var registerStatus: Bool = false
     @State var zero: Int = 0
+    @State var trustedContact: Int = 0
      
     
     var body: some View {
@@ -64,6 +65,12 @@ struct RegistrationForm: View {
                                    TextField("Phone number", value: $phoneNum,formatter: NumberFormatter())
                                    
                                }
+                               
+                               Section(header: Text("Trusted Contact's Mobile Number")) {
+                                   TextField("Mobile Number", value: $trustedContact,formatter: NumberFormatter())
+                                   
+                               }
+                               
                                Section(header: Text("Gender")) {
                                    
                                    Picker("Select Gender", selection: $genderOptionSelected, content: {
@@ -98,7 +105,7 @@ struct RegistrationForm: View {
                                    if password==confirmpassword
                                    {
                                    viewModel.signUp(email: email, password: password)
-                                   viewModel.registerUserDetails(phone: phoneNum, gender: genderOptionSelected)
+                                   viewModel.registerUserDetails(phone: phoneNum,phone2: trustedContact, gender: genderOptionSelected)
                                    self.viewModel.errorMessage="" //clearing error message so that UI is clean on sign out
                                    }
                                    else

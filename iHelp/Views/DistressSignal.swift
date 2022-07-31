@@ -79,6 +79,8 @@ class DistressSignalModel: ObservableObject {
     
     @Published var user = [Users] ()
     @Published var user2 = [Users] ()
+    
+    var flagvar = true
  
     func getNearByUsersNumbersAndCurrentUserLocationForSMS() {
         
@@ -169,7 +171,7 @@ class DistressSignalModel: ObservableObject {
                print ("No document")
                return
            }
-            
+  
             
             //getting all User IDs from Users collection > Users document
             for document in querySnapshot!.documents {
@@ -181,6 +183,27 @@ class DistressSignalModel: ObservableObject {
             
             self.user2 = documents.map {(queryDocumentSnapshot) -> Users in
                let data = queryDocumentSnapshot.data()
+                                
+                  //getting trustedcontact for logged in user
+                for document in querySnapshot!.documents {
+
+                    if(self.flagvar)
+                    {
+                        if self.userID?.uid == document.documentID
+                        {
+                            let trustedNumber = document.get("TrustedContact")as! Int64
+                            let trustedNumberinString = String(trustedNumber)
+                            self.FormattedNumbersToMessage.append(trustedNumberinString)
+                            
+                            //adding police number
+                            let policeNumberinString = "3048447749" //bushra's number acts as police number for testing
+                            self.FormattedNumbersToMessage.append(policeNumberinString)
+                            
+                            self.flagvar=false
+                        }
+                    }
+                         
+                           }
                 
                 //check for nearby users only
                 if self.NearestUserIDs.contains(self.AllUserIDs[x])
@@ -193,10 +216,12 @@ class DistressSignalModel: ObservableObject {
                 }
                 x+=1
                             
-            
+                
                 return Users(Latitude : 0.0, Longitude: 0.0)
 
            }
+            
+            
             
         }
         
@@ -206,6 +231,7 @@ class DistressSignalModel: ObservableObject {
         self.FormattedNumbersToMessage.removeAll()
         self.AllUserIDs.removeAll()
         self.NearestUserIDs.removeAll()
+        self.flagvar=true
 
     }
     

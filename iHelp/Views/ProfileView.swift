@@ -27,11 +27,11 @@ struct ProfileView: View {
     
     @EnvironmentObject var viewModel: AppViewModel
     
-    @State var newEmail: String = ""
+   // @State var newEmail: String = ""
     @State var newPassword: String = ""
     @State var newConfirmpassword: String = ""
     @State var NewphoneNum: Int = 0
-   
+    @State var NewtrustedNum: Int = 0
     //@State var registerStatus: Bool = false
     @State var zero: Int = 0
    // @Published var errorMessage = "" //published variable to handle error message
@@ -44,10 +44,6 @@ struct ProfileView: View {
             NavigationView{
                 Form {
                     
-                    Section(header: Text("EMAIL")) {
-                         TextField("Email", text: $newEmail)
-                         
-                     }
                     
                     
                  Section(header: Text("Change Password")) {
@@ -67,16 +63,19 @@ struct ProfileView: View {
 
                      }
                  Section(header: Text("Change Mobile Number")) {
-                     TextField("Phone number", value: $NewphoneNum,formatter: NumberFormatter())
+                     TextField("Mobile number", value: $NewphoneNum,formatter: NumberFormatter())
                      
                  }
-                 
+                    Section(header: Text("Change Trusted Contact's Mobile Number")) {
+                        TextField("Mobile number", value: $NewtrustedNum,formatter: NumberFormatter())
+                        
+                    }
                     
                     Button(action: {
                         
                         
                             //self.registerStatus = true
-                        guard !newEmail.isEmpty, !newPassword.isEmpty else {
+                        guard  !newPassword.isEmpty else {
                         return
                         }
                         
@@ -84,7 +83,7 @@ struct ProfileView: View {
                         {
                             viewModel.setpass(password: newPassword)
                         //viewModel.signUp(email: email, password: password)
-                        viewModel.UpdateUserDetails(phone:NewphoneNum ,email: newEmail)
+                        viewModel.UpdateUserDetails(phone:NewphoneNum , phone2: NewtrustedNum)
                         self.viewModel.errorMessage="" //clearing error message so that UI is clean on sign out
                         }
                         else
@@ -99,10 +98,11 @@ struct ProfileView: View {
                             Spacer()
                         }
                     })//.disabled(registerStatus)
-                        .disabled(self.newEmail.isEmpty)
+                       // .disabled(self.newEmail.isEmpty)
                         .disabled(self.newPassword.isEmpty)
                         .disabled(self.newConfirmpassword.isEmpty)
                         .disabled(self.NewphoneNum==0)
+                        .disabled(self.NewtrustedNum==0)
                     
                     
                     

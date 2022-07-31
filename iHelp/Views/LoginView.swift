@@ -89,12 +89,13 @@ class AppViewModel: ObservableObject {
     }
     }
     
-    func registerUserDetails(phone: Int, gender: String) {
+    func registerUserDetails(phone: Int, phone2 : Int ,gender: String) {
         
         Auth.auth().addStateDidChangeListener { (auth, userID) in
           if (userID != nil) {
               self.db.collection("Users").document(userID!.uid).setData([
               "Phone": phone,
+              "TrustedContact": phone2,
               "Gender": gender
               ])
           }
@@ -122,7 +123,7 @@ class AppViewModel: ObservableObject {
     }
     
     
-    func UpdateUserDetails(phone: Int, email: String) {
+    func UpdateUserDetails(phone: Int, phone2 : Int) {
         
         let db = Firestore.firestore()
         //let userID = Auth.auth().currentUser?.uid
@@ -130,7 +131,7 @@ class AppViewModel: ObservableObject {
           if (userID != nil) {
               db.collection("Users").document(userID!.uid).updateData([
               "Phone": phone,
-              "Email": email
+              "TrustedContact": phone2
               ])
           }
         }
