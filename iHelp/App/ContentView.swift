@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+struct ShadowButtonStyle: ButtonStyle {
+  func makeBody(configuration: Configuration) -> some View {
+    configuration.label
+      .shadow(
+        color: configuration.isPressed ? Color.blue : Color.black,
+        radius: 4, x: 0, y: 5
+      )
+  }
+}
 
 
 struct ContentView: View {
@@ -92,28 +101,26 @@ struct ContentView: View {
                                     
                                 }, label: {
                                     Text("Sign Out")
-                                        .frame(width: 200, height: 50)
-                                        .background(Color.green)
-                                        .foregroundColor(Color.white)
                                         .padding()
-                                })        )
+                                        //.background(Color.purple)
+                                        .foregroundColor(.blue)
+                                        .padding()
+                                        //.border(Color.purple, width: 5)
+                                        
+                                        .frame(width: 200, height: 100, alignment: .topTrailing)
+                                        //.background(Color.green)
+                                        //.foregroundColor(Color.white)
+                                       
+                                })
+                                    //.buttonStyle(ShadowButtonStyle())
+                                
+            )//nav trailing
             
             
      //end of zstack
                 }.frame(maxWidth: .infinity, maxHeight: .infinity)
                 .accentColor(Color.black)
             .background(LinearGradient(gradient: Gradient(colors: [Color.purple, Color.white]), startPoint: .leading, endPoint: .trailing))
-                ///////
-           /* .navigationBarItems(trailing: //trailiing means end mai lgega item
-                                Button(action: {
-                isShowingSettings = true })
-                                {
-                Image(systemName: "slider.horizontal.3") //thatslider icon to open settings view
-            } //button
-             .sheet(isPresented: $isShowingSettings){
-              SideMenuView()
-            }
-            ) *////navigationbaritems
             }
             else {
             
@@ -134,8 +141,9 @@ struct ContentView: View {
                                 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(AppViewModel())
     }
 }
+
 
 
