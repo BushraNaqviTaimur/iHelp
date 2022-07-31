@@ -20,30 +20,39 @@ struct DistressSignal: View {
 
     @State private var isShowingMessages = false
     
-    @StateObject private var viewModel = DistressSignalModel()
+    @ObservedObject var viewModel = DistressSignalModel()
+
     
-    
-   
     var body: some View {
          
         ZStack{
                 VStack{
                     
-                    Button("test action") {
-                        viewModel.getNearByUsersNumbersAndCurrentUserLocationForSMS()
+                    Text("Distress signal...")
+                        .onAppear(){
+                        do {
+                    viewModel.getNearByUsersNumbersAndCurrentUserLocationForSMS()
+                           }
                         
-                                self.isShowingMessages = true
-                            }
-                           
-                            .sheet(isPresented: self.$isShowingMessages) {
-                                //let finalRecipients = "\(viewModel.FormattedNumbersToMessage ?? "")"
-                                MessageComposeView(recipients: ["\(viewModel.FormattedNumbersToMessage ?? "")"], body: viewModel.SMSToMessage) { messageSent in
-                                    print("MessageComposeView with message sent? \(messageSent)")
-                                }
-                            }
+                        self.isShowingMessages = true
 
+                                    }
+                          
+                         .sheet(isPresented: self.$isShowingMessages) {
+                                
+                             //this if check ensures that message view only appears
+                             //once database gives back the values for both required
+                             //numbers and composed message
+                             if(viewModel.FormattedNumbersToMessage.count != 0)
+                             {
+                                
+                                 MessageComposeView(recipients: viewModel.FormattedNumbersToMessage, body: viewModel.SMSToMessage) { messageSent in
+                                     print("MessageComposeView with message sent? \(messageSent)")
+                                                        }
+                             }
+                                                       }
                  
-                }//end of vstack1
+                } //end of vstack1
         
      //end of zstack
                 }.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -63,10 +72,9 @@ class DistressSignalModel: ObservableObject {
     var myLat:Double=0.0
     var myLon:Double=0.0
     
-    var NumbersToMessage:[String] = []
-    @Published var FormattedNumbersToMessage:String!
+    @Published var FormattedNumbersToMessage = [String]()
     @Published var SMSToMessage = ""
-    var NearestUserIDs:[String] = []
+    var NearestUserIDs:[String?] = []
     var AllUserIDs:[String] = []
     
     @Published var user = [Users] ()
@@ -153,12 +161,15 @@ class DistressSignalModel: ObservableObject {
         
        }
         
+        var x=0
+        
         //quering this time for fetching phone numbers of nearby Users which we found above
         db2.collection("Users").addSnapshotListener { (querySnapshot, error) in
            guard let documents = querySnapshot?.documents else {
                print ("No document")
                return
            }
+            
             
             //getting all User IDs from Users collection > Users document
             for document in querySnapshot!.documents {
@@ -172,35 +183,30 @@ class DistressSignalModel: ObservableObject {
                let data = queryDocumentSnapshot.data()
                 
                 //check for nearby users only
-                
-                if self.NearestUserIDs[0]==self.AllUserIDs[0]
+                if self.NearestUserIDs.contains(self.AllUserIDs[x])
                 {
-                 print("Found")
+                    //fetching phone numbers from nearby users
+                     let phoneNumber = data["Phone"]as! Int64
+                     let phoneNumberinString = String(phoneNumber)
+                     self.FormattedNumbersToMessage.append(phoneNumberinString)
+                     
                 }
-                else
-                {
-                    print("Not found")
-                }
-    
-                
-
-               
-               //fetching phone numbers
-                let phoneNumber = data["Phone"]as! Int64
-                let phoneNumberinString = String(phoneNumber)
-                self.FormattedNumbersToMessage += "\""+phoneNumberinString+"\""+","
-                
-                
+                x+=1
+                            
+            
                 return Users(Latitude : 0.0, Longitude: 0.0)
+
            }
             
         }
         
-        let val = "\(self.FormattedNumbersToMessage ?? "")"
-        print(val)
+    
         
-        //resetting the variable for next time
-        self.FormattedNumbersToMessage=""
+        //resetting the variables for next time
+        self.FormattedNumbersToMessage.removeAll()
+        self.AllUserIDs.removeAll()
+        self.NearestUserIDs.removeAll()
+
     }
     
 
